@@ -1,20 +1,12 @@
 'use client'
 import React, { useState } from 'react'
 import SideBar from '../components/history/sideBar'
-import AlertTable from '../components/history/alertTable'
+import AlertTable, {Alert} from '../components/history/alertTable'
 
-interface Alert{
-  cctv_num: number,
-  cctv_location: string,
-  time_detected: Date,
-  status: string,
-  dispatched:boolean,
-  done: boolean
-}
 
 const sampleAlert:Alert[] = [
-  {cctv_num: 1, cctv_location: 'Bulaksumur, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281', time_detected:new Date("2024-10-16T14:30:00Z"), status:'DANGER', dispatched: false, done: false},
-  {cctv_num: 2, cctv_location: 'Bulaksumur, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281', time_detected:new Date("2024-10-16T14:30:00Z"), status:'WARNING', dispatched: false, done: false}
+  {alert_id:'0001',cctv_num: 1, cctv_location: 'Bulaksumur, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281', time_detected:new Date("2024-10-16T14:30:00Z"), status:'DANGER', dispatched: false, done: false},
+  {alert_id:'0002',cctv_num: 2, cctv_location: 'Bulaksumur, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281', time_detected:new Date("2024-10-16T14:30:00Z"), status:'WARNING', dispatched: false, done: false}
 ]
 
 

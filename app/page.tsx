@@ -1,11 +1,9 @@
 'use client'
 import Image from "next/image";
-import NavBar from "./components/navBar";
 
 export default function Home() {
   return (
     <div className="">
-      <NavBar/>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"

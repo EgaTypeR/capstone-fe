@@ -50,7 +50,7 @@ export default function SideBar({searchTerm, setSearchTerm, selectedCategory, se
               {category}
               {/* Animated underline */}
               <span
-                className={`absolute bottom-0 left-0 w-full h-1 rounded-md bg-falightgray transition-transform duration-300 ease-out transform ${
+                className={`absolute bottom-0 left-0 w-full h-1 rounded-md bg-falightgray transition-transform duration-500 ease-out transform ${
                   selectedCategory === category
                     ? 'scale-x-100'
                     : 'scale-x-0 group-hover:scale-x-100'

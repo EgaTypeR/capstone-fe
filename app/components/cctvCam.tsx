@@ -56,8 +56,6 @@ export default function CctvCamBox({name, camUrl}: CCTVProps) {
         </div>
       </div>
       <div className='flex bg-black justify-center items-center aspect-video '>
-        
-        
         {
           isOffline? (
             <div className='p-4'>
