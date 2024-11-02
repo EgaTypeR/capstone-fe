@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,24 @@ import { usePathname } from "next/navigation";
 const NavBar = () => {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState(false)
+  const [showNavbar, setShowNavbar] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  const handleScroll = () =>{
+    if (window.scrollY > lastScrollY){
+      setShowNavbar(false)
+    }else{
+      setShowNavbar(true)
+    }
+    setLastScrollY(window.scrollY)
+  }
+
+  useEffect(()=>{
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [lastScrollY])
 
   const navItems = [
     { name: 'HOME', path: '/' },
@@ -20,7 +38,7 @@ const NavBar = () => {
 
   
   return (
-    <nav className="bg-falightgray fixed w-full z-10 justify-start items-start">
+    <nav className={`bg-falightgray fixed w-full z-10 justify-start items-start duration-300 ease-out ${showNavbar? 'translate-y-0':'-translate-y-full'}`}>
       <div className="bg-fablue justify-start items-start mb-1">
       <div className="px-10 flex justify-between h-14">
         <div className="flex items-center">

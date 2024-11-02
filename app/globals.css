@@ -25,3 +25,20 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Custom scrollbar */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-custom::-webkit-scrollbar-track {
+  background-color: #D9D9D9; /* Track color */
+  border-radius: 4px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #324861; /* Thumb color */
+  border-radius: 4px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: #293e56; /* Hover color */
+}
+

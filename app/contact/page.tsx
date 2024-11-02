@@ -7,9 +7,8 @@ const contactData = {
 }
 const Page: React.FC = () =>{
   return(
-    <div className="bg-fagray">
-      <div className="flex flex-col justify-start items-center min-h-screen px-10 py-10">
-        <div className="w-4/5 h-64 bg-white opacity-30 rounded-lg text-blue-600 text-center">Peta</div>
+      <div className="flex flex-col justify-start items-center px-10 pt-16 bg-fagray min-h-screen">
+        <div className="w-4/5 h-64 bg-white opacity-30 rounded-lg text-blue-600 text-center mt-8">Peta</div>
         <p className="text-falightgray text-2xl font-bold m-10">Contact Information</p>
         <div className="flex flex-row justify-center items-center">
           <div className="flex flex-col justify-center items-center mx-10 gap-2">
@@ -48,8 +47,6 @@ const Page: React.FC = () =>{
         </div>
 
       </div>
-
-    </div>
   )
 }
 
