@@ -3,7 +3,7 @@ import CctvCamBox from '../components/cctvCam'
 
 export default function page() {
 
-  const hlsUrlExample = 'https://stream-akamai.castr.com/5b9352dbda7b8c769937e459/live_2361c920455111ea85db6911fe397b9e/index.fmp4.m3u8'
+  // const hlsUrlExample = 'https://stream-akamai.castr.com/5b9352dbda7b8c769937e459/live_2361c920455111ea85db6911fe397b9e/index.fmp4.m3u8'
   
   const cctvFeeds = [
     // { id: 1, name: "CCTV Camera 1", feedUrl: hlsUrlExample },
