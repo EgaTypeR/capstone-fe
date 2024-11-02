@@ -1,5 +1,5 @@
 'use client'
-import Hls, { Events, ErrorData } from 'hls.js'
+import Hls from 'hls.js'
 import React, { useEffect, useRef, useState } from 'react'
 interface CCTVProps{
   name: string,
@@ -18,7 +18,7 @@ export default function CctvCamBox({name, camUrl}: CCTVProps) {
   
     if (Hls.isSupported()) {
       const hls = new Hls({
-        xhrSetup: (xhr, url) => {
+        xhrSetup: (xhr) => {
           // Add custom headers here
           xhr.setRequestHeader("ngrok-skip-browser-warning", "69420");
         },
@@ -34,15 +34,15 @@ export default function CctvCamBox({name, camUrl}: CCTVProps) {
       });
   
       // Error handling
-      // hls.on(Hls.Events.ERROR, (event, data) => {
-      //   // Check if data.fatal is defined and its type
-      //   // if (data.fatal !== undefined) {
-      //   //   console.error('Network error encountered, stream may be offline:', data);
-      //   //   console.error(`Error type: ${data.type}, details: ${data.details}, fatal: ${data.fatal}`);
-      //   //   setIsOffline(true);
-      //   // }
-      //   hls.startLoad();
-      // });
+      hls.on(Hls.Events.ERROR, (event, data) => {
+        // Check if data.fatal is defined and its type
+        if (data.fatal !== undefined) {
+          console.error('Network error encountered, stream may be offline:', data);
+          console.error(`Error type: ${data.type}, details: ${data.details}, fatal: ${data.fatal}`);
+          setIsOffline(true);
+        }
+        hls.startLoad();
+      });
       
       
   
