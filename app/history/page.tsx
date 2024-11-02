@@ -27,23 +27,24 @@ const  Page: React.FC = () =>{
 
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [error, setError] = useState(false)
-  const [isLoadig, setIsLoading] = useState(false)
+  // const [error, setError] = useState(false)
+  // const [isLoadig, setIsLoading] = useState(false)
 
   const [alerts, setAlerts] = useState<Alert[]>([])
-  const [modalOpen, setModalOpen] = useState(false)
+  // const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(()=>{
     axios.get(`http://localhost:8080/client/alert-history?filter=${selectedCategory}`)
     .then((response) => {
       const {data} = response.data
       setAlerts(data)
-      setIsLoading(false)
+      // setIsLoading(false)
       console.log(data)
     })
     .catch((err) =>{
-      setError(true)
-      setIsLoading(false)
+      console.log(err)
+      // setError(true)
+      // setIsLoading(false)
     })
   }, [selectedCategory])
 
