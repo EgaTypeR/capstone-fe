@@ -14,6 +14,7 @@
     "next": "14.2.14",
     "react": "^18",
     "react-dom": "^18",
+    "react-toastify": "^10.0.6",
     "video.js": "^8.18.1"
   },
   "devDependencies": {

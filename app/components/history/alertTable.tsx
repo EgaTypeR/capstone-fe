@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from "react"
 import ConfirmationModal from "./confirmationModal";
+import { toast } from "react-toastify";
 
 export interface CameraInfo {
   _id: string;
@@ -47,7 +48,8 @@ export default function AlertTable({alerts = [], onUpdate}: AlertTableProps){
 
   const handleConfirm = () => {
       if (currentAlertId && fieldToUpdate) {
-          onUpdate(currentAlertId, fieldToUpdate); // Pass the ID and field to the parent
+        toast.info(`Data Updated`)
+        onUpdate(currentAlertId, fieldToUpdate); // Pass the ID and field to the parent
       }
       setIsModalOpen(false);
       setCurrentAlertId(null);

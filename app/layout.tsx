@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "./components/navBar";
 import Footer from "./components/footer";
+import { Notify } from "./components/notify";
+import { WebSocketProvider } from "./components/wsProvider";
+import { Notification } from "./components/notificationComp";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,17 +28,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased scrollbar-custom overflow-auto`}
       >
         <div className="flex flex-col min-h-screen">
-        <NavBar/>
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer/>
+          <WebSocketProvider>
+            <NavBar/>
+              <main className="flex-grow">
+                <Notify/>
+                {children}
+                <Notification/>
+              </main>
+            <Footer/>
+          </WebSocketProvider>
         </div>
       </body>
     </html>
