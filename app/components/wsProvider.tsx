@@ -11,7 +11,7 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const [ws, setWs] = useState<WebSocket | null>(null);
 
     useEffect(() => {
-        const socket = new WebSocket("ws://localhost:8080/ws/get-notification");
+        const socket = new WebSocket(`${process.env.NEXT_PUBLIC_WEBSOCKET_URL}/get-notification`);
         
         socket.onopen = () => console.log("WebSocket connected");
         socket.onerror = (error) => console.log("WebSocket Error:" + error)

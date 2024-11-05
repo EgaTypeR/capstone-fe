@@ -27,55 +27,29 @@ const  Page: React.FC = () =>{
 
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
-  // const [error, setError] = useState(false)
-  // const [isLoadig, setIsLoading] = useState(false)
 
   const [alerts, setAlerts] = useState<Alert[]>([])
-  // const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(()=>{
     axios.get(`http://localhost:8080/client/alert-history?filter=${selectedCategory}`)
     .then((response) => {
       const {data} = response.data
       setAlerts(data)
-      // setIsLoading(false)
-      console.log(data)
     })
     .catch((err) =>{
       console.log(err)
-      // setError(true)
-      // setIsLoading(false)
     })
   }, [selectedCategory])
 
-
-  // const updateAlert = async (alert: Alert, field: keyof Pick<Alert, 'dispatched' | 'done'>) =>{
-  //   const updatedValue = !alert[field]; // This toggles the current value of the field
-  //   const updatedData = { [field]: updatedValue }; // Prepare the updated data object
-
-  //   try {
-  //     axios.patch(`http://localhost:8080/client/update-alert/${alert._id}`, updatedData)
-
-  //     setAlerts((prevAlerts) =>(
-  //       prevAlerts.map((prevAlert) =>(
-  //         prevAlert._id === alert._id ? { ...prevAlert, [field]: updatedValue } : prevAlert
-  //       ))
-  //     ))
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
-
   const updateAlert = async (alertId: string, field: keyof Pick<Alert, 'dispatched' | 'done'>) => {
     const alertToUpdate = alerts.find(alert => alert._id === alertId);
-    console.log(alertToUpdate)
-    if (!alertToUpdate) return; // Guard clause if the alert is not found
+    if (!alertToUpdate) return; 
 
-    const updatedValue = !alertToUpdate[field]; // Toggle the current value
-    const updatedData = { [field]: updatedValue }; // Prepare the updated data
+    const updatedValue = !alertToUpdate[field]; 
+    const updatedData = { [field]: updatedValue };
 
     try {
-        await axios.patch(`http://localhost:8080/client/update-alert/${alertId}`, updatedData);
+        await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/client/update-alert/${alertId}`, updatedData);
 
         setAlerts(prevAlerts =>
             prevAlerts.map(prevAlert =>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useNotification } from "./notificationContext";
 
 
 const NavBar = () => {
@@ -10,6 +11,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [showNavbar, setShowNavbar] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const {unreadCount} = useNotification()
 
   const handleScroll = () =>{
     if (window.scrollY > lastScrollY){
@@ -28,7 +30,6 @@ const NavBar = () => {
   }, [lastScrollY])
 
   const navItems = [
-    { name: 'HOME', path: '/' },
     { name: 'ABOUT', path: '/about' },
     { name: 'CCTV', path: '/cctv' },
     { name: 'ALERT', path: '/alert' },
@@ -60,22 +61,26 @@ const NavBar = () => {
           </button>
         </div>
         <div className={`md:flex ${isOpen ? 'block' : 'hidden'}`}>
-        <ul className="flex">
-        {
-            navItems.map((item)=>(
-              <li key={item.name} className="flex items-center">
-                <Link href={item.path} 
-                className={`h-full px-6 py-2 duration-300 hover:bg-falightgray hover:text-fablue flex items-center
-                  font-bold
-                  ${pathName === item.path? 'bg-falightgray text-fablue':'bg-fablue text-falightgray'}`
-                }>
-                  {item.name}
-                </Link>
-              </li>
-            )
-            )
-          }
-        </ul>
+          <ul className="flex">
+            {
+              navItems.map((item) => (
+                <li key={item.name} className="flex items-center">
+                  <Link 
+                    href={item.path} 
+                    className={`h-full px-6 py-2 duration-300 hover:bg-falightgray hover:text-fablue flex items-center font-bold 
+                      ${pathName === item.path ? 'bg-falightgray text-fablue' : 'bg-fablue text-falightgray'}`}
+                  >
+                    <span className="flex items-center">
+                      {item.name}
+                      {item.name === "ALERT" && unreadCount > 0 && (
+                        <span className="flex justify-center items-center ml-2 text-falightgray rounded-full bg-red-600 text-xs p-1 w-6 h-6 ">{`${unreadCount}`}</span>
+                      )}
+                    </span>
+                  </Link>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
       </div>

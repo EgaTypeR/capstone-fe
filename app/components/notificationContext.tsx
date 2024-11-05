@@ -5,6 +5,7 @@ import React, { createContext, useContext, useState } from 'react';
 interface NotificationContextType {
     unreadCount: number;
     incrementCount: () => void;
+    setUnreadNotifCount: (num: number) => void;
 }
 
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
@@ -16,8 +17,12 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         setUnreadCount(prevCount => prevCount + 1);
     };
 
+    const setUnreadNotifCount = (num: number) =>{
+        setUnreadCount(num)
+    }
+
     return (
-        <NotificationContext.Provider value={{ unreadCount, incrementCount }}>
+        <NotificationContext.Provider value={{ unreadCount, incrementCount, setUnreadNotifCount }}>
             {children}
         </NotificationContext.Provider>
     );

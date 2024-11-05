@@ -42,3 +42,13 @@ body {
   background-color: #293e56; /* Hover color */
 }
 
+.toast-warning {
+  background-color: #FFA726; /* orange for warning */
+  color: #fff;
+}
+.toast-danger {
+  background-color: #E53935; /* red for danger */
+  color: #fff;
+}
+
+
