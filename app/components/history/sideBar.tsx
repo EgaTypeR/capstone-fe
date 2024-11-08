@@ -14,6 +14,10 @@ export default function SideBar({searchTerm, setSearchTerm, selectedCategory, se
 
   const categories = [
     {
+      key: 'unverif',
+      text: 'Unverified'
+    },
+    {
       key: 'all',
       text: 'All History Cases'
     }, 
@@ -68,6 +72,11 @@ export default function SideBar({searchTerm, setSearchTerm, selectedCategory, se
                 } origin-left`}
               />
             </button>
+              {
+                category.key == "unverif" &&(
+                  <div className='h-1 my-2'></div>
+                )
+              }
           </li>
         ))}
         </ul>

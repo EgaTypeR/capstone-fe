@@ -31,7 +31,7 @@ const  Page: React.FC = () =>{
   const [alerts, setAlerts] = useState<Alert[]>([])
 
   useEffect(()=>{
-    axios.get(`http://localhost:8080/client/alert-history?filter=${selectedCategory}`)
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/client/alert-history?filter=${selectedCategory}`)
     .then((response) => {
       const {data} = response.data
       setAlerts(data)

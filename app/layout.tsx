@@ -4,9 +4,8 @@ import "./globals.css";
 import NavBar from "./components/navBar";
 import Footer from "./components/footer";
 import { Notify } from "./components/notify";
-import { WebSocketProvider } from "./components/wsProvider";
-import { Notification } from "./components/notificationComp";
-import { NotificationProvider } from "./components/notificationContext";
+import { Providers } from "@/store/provider";
+import NotificationWebSocket from "./components/notificationWebsocket";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,17 +35,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased scrollbar-custom overflow-auto`}
       >
         <div className="flex flex-col min-h-screen">
-          <NotificationProvider>
-            <WebSocketProvider>
+            <Providers>
               <NavBar/>
                 <main className="flex-grow">
+                  <NotificationWebSocket/>
                   <Notify/>
                     {children}
-                  <Notification/>
                 </main>
               <Footer/>
-            </WebSocketProvider>
-          </NotificationProvider>
+            </Providers>
         </div>
       </body>
     </html>
