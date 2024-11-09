@@ -2,6 +2,7 @@
 import React, { useState } from "react"
 import ConfirmationModal from "./confirmationModal";
 import { toast } from "react-toastify";
+import { EventDetail } from "./eventDetail";
 
 export interface CameraInfo {
   _id: string;
@@ -52,35 +53,36 @@ export const FormatDate = (dateStr: string) => {
 
 
 export default function AlertTable({alerts = [], onUpdate, verification}: AlertTableProps){
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentAlertId, setCurrentAlertId] = useState<string | null>(null);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
+  const [currentAlert, setCurrentAlert] = useState<Alert | null>(null);
   const [fieldToUpdate, setFieldToUpdate] = useState<keyof Pick<Alert, 'dispatched' | 'done'| 'verification'> | null>(null);
 
-  const handleCheckboxClick = (alertId: string, field: keyof Pick<Alert, 'dispatched' | 'done' | 'verification'>) => {
-    console.log({
-      alertId: alertId,
-      field: field
-    })
-      setCurrentAlertId(alertId);
+  const handleCheckboxClick = (alert: Alert, field: keyof Pick<Alert, 'dispatched' | 'done' | 'verification'>) => {
+      setCurrentAlert(alert);
       setFieldToUpdate(field);
-      setIsModalOpen(true);
+      setIsConfirmationModalOpen(true);
   };
 
   const handleConfirm = () => {
-      if (currentAlertId && fieldToUpdate) {
+      if (currentAlert?._id && fieldToUpdate) {
         toast.info(`Data Updated`)
-        onUpdate(currentAlertId, fieldToUpdate); // Pass the ID and field to the parent
+        onUpdate(currentAlert._id, fieldToUpdate); // Pass the ID and field to the parent
       }
-      setIsModalOpen(false);
-      setCurrentAlertId(null);
+      setIsConfirmationModalOpen(false);
+      setCurrentAlert(null);
       setFieldToUpdate(null);
   };
 
   const handleCancel = () => {
-      setIsModalOpen(false);
-      setCurrentAlertId(null);
+      setIsConfirmationModalOpen(false);
+      setCurrentAlert(null);
       setFieldToUpdate(null);
   };
+
+  const handleDetailClose = () =>{
+    setIsDetailModalOpen(false)
+  }
 
   // const handleChange = (alert: Alert, field: keyof Pick<Alert, 'dispatched' | 'done'>) => {
   //   onUpdate(alert, field); // Pass the alert and the field to the parent for API call
@@ -102,13 +104,17 @@ export default function AlertTable({alerts = [], onUpdate, verification}: AlertT
             )}
             <th className="px-4 py-2 max-w-64 text-fagray ">Dispatched</th>
             <th className="px-4 py-2 max-w-64 text-fagray ">Done</th>
+            <th className="px-4 py-2 text-fagray "></th>
           </tr>
         </thead>
         <tbody>
           {
             alerts && alerts.length >0 ?(
             alerts.map((alert, index)=>(
-              <tr key={alert._id} className="border-b">
+              <tr 
+                key={alert._id} 
+                className="border-b"
+              >
                 <td className="px-4 py-2 text-center max-w-64">{index + 1}</td>
                 <td className="px-4 py-2 text-center max-w-64">{alert.camera_info.camera_num}</td>
                 <td className="px-4 py-2 text-center max-w-64">{alert.camera_info.location}</td>
@@ -128,7 +134,7 @@ export default function AlertTable({alerts = [], onUpdate, verification}: AlertT
                     className="h-5 w-5 rounded-sm border-gray-300 text-blue-600 focus:ring-blue-500"
                     type="checkbox" 
                     checked = {alert.verification}
-                    onChange={() =>{handleCheckboxClick(alert._id, 'verification')}}
+                    onChange={() =>{handleCheckboxClick(alert, 'verification')}}
                   />                  
                 </td>)}
                 <td className="px-4 py-2 text-center max-w-64">
@@ -136,7 +142,7 @@ export default function AlertTable({alerts = [], onUpdate, verification}: AlertT
                     className="h-5 w-5 rounded-sm border-gray-300 text-blue-600 focus:ring-blue-500"
                     type="checkbox" 
                     checked = {alert.dispatched}
-                    onChange={() =>{handleCheckboxClick(alert._id, 'dispatched')}}
+                    onChange={() =>{handleCheckboxClick(alert, 'dispatched')}}
                   />                  
                 </td>
                 <td className="px-4 py-2 text-center max-w-64">
@@ -144,8 +150,19 @@ export default function AlertTable({alerts = [], onUpdate, verification}: AlertT
                     className="h-5 w-5 rounded-sm border-gray-300 text-blue-600 focus:ring-blue-500"
                     type="checkbox" 
                     checked = {alert.done}
-                    onChange={() =>{handleCheckboxClick(alert._id, 'done')}}
+                    onChange={() =>{handleCheckboxClick(alert, 'done')}}
                   />
+                </td>
+                <td className="px-4 py-2 text-center">
+                  <button
+                    className="bg-white bg-opacity-0 hover:bg-opacity-20 duration-300 p-2 rounded-lg"
+                    onClick={() => {
+                      setCurrentAlert(alert)
+                      setIsDetailModalOpen(true)
+                    }}
+                  >
+                    {"#>"}
+                  </button>
                 </td>
               </tr>
             )))
@@ -159,11 +176,21 @@ export default function AlertTable({alerts = [], onUpdate, verification}: AlertT
           }
         </tbody>
       </table>
+      { 
+        currentAlert && (
+          <EventDetail
+            isOpen = {isDetailModalOpen}
+            alert={currentAlert}
+            handleClose={handleDetailClose}
+          />
+        )
+       }
       <ConfirmationModal
-        isOpen = {isModalOpen}
+        isOpen = {isConfirmationModalOpen}
         onConfirm={handleConfirm}
         onCancel={handleCancel}
       />
+      
     </div>
   )
 }
