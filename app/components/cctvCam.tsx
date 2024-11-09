@@ -6,12 +6,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { deleteNotificationByCamIds, deleteNotificationByEventIds } from '@/store/notificationSlice'
+import { FormatDate } from './history/alertTable'
 interface CCTVProps{
   name: string,
   camUrl: string,
   camId: string
 }
-
 
 export default function CctvCamBox({name, camUrl, camId}: CCTVProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -189,24 +189,32 @@ return (
               </video>
             )}
           </div>
-          <div className='flex gap-2 justify-end items-center mt-2 mx-4'>
-            <div>{notification[0]?._id}</div>
-            <button
-              className='border-gray-800 hover:bg-gray-300 p-2 border-2 rounded-lg text-gray-800 duration-200'
-              onClick={(e) => {
-                e.stopPropagation();
-                handleUverification(notification[0].event_id)
-              }}
-            >
-              Not Street Crime
-            </button>
-            <button
-              className='bg-red-700 hover:bg-red-800 border-red-700 hover:border-red-800 p-2 rounded-lg border-2 text-falightgray duration-200'
-              onClick={() => handleVerification(notification[0].event_id, notification[0].camera_id)}
-            >
-              Street Crime
-            </button>
-          </div>
+          {
+            notification.length > 0 &&(<div className='flex gap-2 justify-end items-center mt-2 mx-4 mb-1'>
+              {
+                notification[0]?.danger 
+                ? (<div className='text-fatomato font-bold'>Danger detected at</div>)
+                : (<div className='text-faorange font-bold'>Warning detected at</div>)
+              }
+              <div className='text-fablue font-bold mr-10'>
+                {FormatDate(notification[0].sent_at).time}
+              </div>
+              <button
+                className='border-gray-800 hover:bg-gray-300 p-2 border-2 rounded-lg text-gray-800 duration-200'
+                onClick={() => {
+                  handleUverification(notification[0].event_id)
+                }}
+              >
+                Not Street Crime
+              </button>
+              <button
+                className='bg-red-700 hover:bg-red-800 border-red-700 hover:border-red-800 p-2 rounded-lg border-2 text-falightgray duration-200'
+                onClick={() => handleVerification(notification[0].event_id, notification[0].camera_id)}
+              >
+                Street Crime
+              </button>
+            </div>)
+          }
         </div>
       </div>
     )}

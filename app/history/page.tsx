@@ -41,7 +41,7 @@ const  Page: React.FC = () =>{
     })
   }, [selectedCategory])
 
-  const updateAlert = async (alertId: string, field: keyof Pick<Alert, 'dispatched' | 'done'>) => {
+  const updateAlert = async (alertId: string, field: keyof Pick<Alert, 'dispatched' | 'done'| 'verification'>) => {
     const alertToUpdate = alerts.find(alert => alert._id === alertId);
     if (!alertToUpdate) return; 
 
@@ -73,7 +73,7 @@ const  Page: React.FC = () =>{
         </div>
         <div className='w-4/5 h-screen overflow-auto bg-fagray px-4'>
           <div className='h-20 bg-fagray'></div>
-          <AlertTable alerts={alerts} onUpdate={updateAlert}></AlertTable>
+          <AlertTable alerts={alerts} onUpdate={updateAlert} verification={selectedCategory == "unverif"}></AlertTable>
         </div>
       </div>
       
