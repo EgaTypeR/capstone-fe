@@ -73,7 +73,7 @@ const  Page: React.FC = () =>{
         </div>
         <div className='w-4/5 h-screen overflow-auto bg-fagray px-4'>
           <div className='h-20 bg-fagray'></div>
-          <AlertTable alerts={alerts} onUpdate={updateAlert} verification={selectedCategory == "unverif"}></AlertTable>
+          <AlertTable alerts={alerts} onUpdate={updateAlert} verification={selectedCategory == "unverif"} setAlerts={setAlerts}></AlertTable>
         </div>
       </div>
       

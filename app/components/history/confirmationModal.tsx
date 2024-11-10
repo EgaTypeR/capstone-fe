@@ -8,7 +8,7 @@ interface ConfirmationModalProps {
 const ConfirmationModal = ({isOpen, onConfirm, onCancel}: ConfirmationModalProps) => {
   if (!isOpen) return null
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center'>
+    <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>
       <div className='bg-white rounded-lg shadow-md p-4'>
       <h2 className="text-lg font-bold mb-4 text-gray-800">Confirm Action</h2>
         <p className='text-gray-800'>Are you sure you want to change this status?</p>

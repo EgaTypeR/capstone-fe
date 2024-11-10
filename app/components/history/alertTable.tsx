@@ -32,6 +32,7 @@ interface AlertTableProps{
   alerts: Alert[],
   onUpdate: (alertId: string, field: keyof Pick<Alert, 'dispatched' | 'done'| 'verification'>) => void;
   verification: boolean
+  setAlerts: React.Dispatch<React.SetStateAction<Alert[]>>
 }
 
 export const FormatDate = (dateStr: string) => {
@@ -52,7 +53,7 @@ export const FormatDate = (dateStr: string) => {
 };
 
 
-export default function AlertTable({alerts = [], onUpdate, verification}: AlertTableProps){
+export default function AlertTable({alerts = [], onUpdate, verification, setAlerts}: AlertTableProps){
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
   const [currentAlert, setCurrentAlert] = useState<Alert | null>(null);
@@ -176,21 +177,21 @@ export default function AlertTable({alerts = [], onUpdate, verification}: AlertT
           }
         </tbody>
       </table>
+      <ConfirmationModal
+        isOpen = {isConfirmationModalOpen}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
       { 
         currentAlert && (
           <EventDetail
             isOpen = {isDetailModalOpen}
             alert={currentAlert}
             handleClose={handleDetailClose}
+            setAlerts={setAlerts}
           />
         )
        }
-      <ConfirmationModal
-        isOpen = {isConfirmationModalOpen}
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      />
-      
     </div>
   )
 }
