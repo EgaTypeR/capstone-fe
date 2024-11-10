@@ -25,6 +25,7 @@ export interface Alert {
   danger: boolean;
   verification:boolean;
   notification_sent: boolean;
+  footage_path: string;
   dispatched: boolean;
   done: boolean;
 }

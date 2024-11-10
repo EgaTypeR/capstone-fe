@@ -65,18 +65,8 @@ export const EventDetail = ({alert, isOpen, handleClose, setAlerts}: EventDetail
         </div>
         <div className='flex flex-row justify-center gap-4'>
           <div className='pb-1 pl-1'>
-            {/* <iframe 
-              width="1000" 
-              height="600"
-              // src="https://www.youtube.com/embed/XcQb07nwle4?si=dtrW9a80KEangToL" "20241107_194716.mp4" 
-              src='https://api.forceai.tech/uploads/20241107_194716.mp4'
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerpolicy="strict-origin-when-cross-origin" 
-              allowfullscreen></iframe> */}
               <video width="800" controls autoPlay loop>
-                <source src="https://api.forceai.tech/uploads/20241110_215719.mp4" type="video/mp4" />
+                <source src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/${thisAlert.footage_path}`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
           </div>
