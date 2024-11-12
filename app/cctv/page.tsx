@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import CctvCamBox from '../components/cctvCam'
 import axios from 'axios'
 import { CameraInfo } from '../components/history/alertTable'
+import WebRTCPlayer from '../components/cctv/rtcCam'
 
 const Page: React.FC = () => {
 
@@ -42,6 +43,7 @@ const Page: React.FC = () => {
               </div>
             )))
           }
+          <WebRTCPlayer/>
         </div>
       </div>
     </div>

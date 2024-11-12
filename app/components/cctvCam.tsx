@@ -98,7 +98,9 @@ const handleVerification = (event_id:string , cam_id: string) =>{
   .then((event)=>{
     dispatch(deleteNotificationByCamIds([cam_id]))
     console.log(event)
-    toast.info("Verification Successful")
+    toast.info("Verification Successful",{
+      autoClose:2000
+    })
   })
   .catch((err) => {
     console.log(err)
@@ -107,7 +109,9 @@ const handleVerification = (event_id:string , cam_id: string) =>{
 
 const handleUverification = (event_id:string) =>{
   dispatch(deleteNotificationByEventIds([event_id]))
-  toast.info("Confirmed Not Crime")
+  toast.info("Confirmed Not Crime", {
+    autoClose:2000
+  })
 }
 
 return (

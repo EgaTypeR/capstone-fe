@@ -17,6 +17,7 @@
     "react-dom": "^18",
     "react-redux": "^9.1.2",
     "react-toastify": "^10.0.6",
+    "socket.io-client": "^4.8.1",
     "video.js": "^8.18.1"
   },
   "devDependencies": {
