@@ -6,9 +6,6 @@ import { CameraInfo } from '../components/history/alertTable'
 // import WebRTCPlayer from '../components/cctv/rtcCam'
 
 const Page: React.FC = () => {
-
-  // const hlsUrlExample = 'https://stream-akamai.castr.com/5b9352dbda7b8c769937e459/live_2361c920455111ea85db6911fe397b9e/index.fmp4.m3u8'
-
   const [cameras, setCameras] = useState<CameraInfo[]>()
   useEffect(()=>{
     axios.get(`${process.env.NEXT_PUBLIC_API_URL}/client/cameras`)
@@ -43,7 +40,6 @@ const Page: React.FC = () => {
               </div>
             )))
           }
-          {/* <WebRTCPlayer/> */}
         </div>
       </div>
     </div>

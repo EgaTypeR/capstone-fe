@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import { Notify } from "./components/notify";
 import { Providers } from "@/store/provider";
 import NotificationWebSocket from "./components/notificationWebsocket";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
